@@ -11,12 +11,12 @@ app.use((req,res, next)=>{
     console.log(req.headers);
     
     res.StatusCode =200;
-    res.setHeaders('Content-Type', 'text/html');
+    res.setHeader('Content-Type', 'text/html');
     res.end('<html><body><h1>Hello ExpressJs</h1></body></html>');
 });
 
 const server = http.createServer(app);
 
 server.listen(port, hostname, ()=>{
-    console.log(`Server is running on http://${hostname}:${post}`);
+    console.log(`Server running at http://${hostname}:${port}`);
 });
