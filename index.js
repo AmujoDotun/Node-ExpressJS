@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const dishRouter = require('./routes/dishRouter');
 
 const port = 3000;
 
@@ -14,30 +15,9 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.json());
 
-app.all('/dishes', (req, res, next) =>{
-    res.StatusCode = 200;
-    res.setHeader('Content-Type', 'test/plain');
-    next();
-});
+//ROuter
+app.use('/dishes', dishRouter);
 
-app.get('/dishes', (res, req, next)=>{
-    res.end('Will send all the dishes to you soon!');
-});
-
-app.post('/dishes', (req, res, next)=>{
-    res.end('Will add the dishes ' + req.body.name + ' with detials' +
-        req.body.description);
-});
-
-app.put('/dishes', (req,res, next)=>{
-    res.StatusCode = 403;
-    res.end('Update operation is not supported');
-});
-
-
-app.delete('/dishes', (req, res, next)=>{
-    res.end('Delete all dishes!');
-});
 
 // Working with each resource
 
