@@ -2,6 +2,7 @@ const express = require('express');
 
 const http = require('http');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const port = 3000;
 
@@ -11,7 +12,53 @@ const hostname ='localhost';
 app.use(morgan('dev'));
 
 app.use(express.static(__dirname+'/public'));
+app.use(bodyParser.json());
 
+app.all('/dishes', (req, res, next) =>{
+    res.StatusCode = 200;
+    res.setHeader('Content-Type', 'test/plain');
+    next();
+});
+
+app.get('/dishes', (res, req, next)=>{
+    res.end('Will send all the dishes to you soon!');
+});
+
+app.post('/dishes', (req, res, next)=>{
+    res.end('Will add the dishes ' + req.body.name + ' with detials' +
+        req.body.description);
+});
+
+app.put('/dishes', (req,res, next)=>{
+    res.StatusCode = 403;
+    res.end('Update operation is not supported');
+});
+
+
+app.delete('/dishes', (req, res, next)=>{
+    res.end('Delete all dishes!');
+});
+
+// Working with each resource
+
+app.get('/dishes/:dishId', (res, req, next)=>{
+    res.end('Will send all the dishes to you for! ' + req.params.dishId);
+});
+
+app.post('/dishes/:dishId', (req, res, next)=>{
+    res.end('Post update is not in operation for /dishes/ '+ req.params.dishId)
+});
+
+app.put('/dishes/:dishId', (req,res, next)=>{
+    res.write('Updating dish '+ req.params.dishId)
+    res.end('Will Update the dish ' +req.body.name + 
+        ' with detials ' + req.body.description)
+});
+
+
+app.delete('/dishes/:dishId', (req, res, next)=>{
+    res.end('Delete dishes for' + req.params.dishId);
+});
 
 
 app.use((req,res, next)=>{
