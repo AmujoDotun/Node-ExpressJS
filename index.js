@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const dishRouter = require('./routes/dishRouter');
 const promoRouter = require('./routes/promoRouter');
+const leaderRouter = require('./routes/leaderRouter');
 
 const port = 3000;
 
@@ -18,31 +19,10 @@ app.use(bodyParser.json());
 
 //ROuter
 app.use('/dishes', dishRouter); 
-// app.use('/dishes/:dishId', dishRouter);
-app.use('/promos', promoRouter);
-// app.use('/promos/:promoId', promoRouter);
+app.use('/promotions', promoRouter);
+app.use('/leaders', leaderRouter);
 
 
-// Working with each resource
-
-// app.get('/dishes/:dishId', (res, req, next)=>{
-//     res.end('Will send all the dishes to you for! ' + req.params.dishId);
-// });
-
-// app.post('/dishes/:dishId', (req, res, next)=>{
-//     res.end('Post update is not in operation for /dishes/ '+ req.params.dishId)
-// });
-
-// app.put('/dishes/:dishId', (req,res, next)=>{
-//     res.write('Updating dish '+ req.params.dishId)
-//     res.end('Will Update the dish ' +req.body.name + 
-//         ' with detials ' + req.body.description)
-// });
-
-
-// app.delete('/dishes/:dishId', (req, res, next)=>{
-//     res.end('Delete dishes for' + req.params.dishId);
-// });
 
 
 app.use((req,res, next)=>{
