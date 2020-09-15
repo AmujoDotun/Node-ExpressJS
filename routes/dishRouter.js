@@ -14,7 +14,7 @@ dishRouter.route('/')
     next();
 })
 
-.get((res, req, next)=>{
+.get((req, res, next)=>{
     res.end('Will send all the dishes to you soon!');
 })
 
