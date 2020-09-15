@@ -18,8 +18,9 @@ app.use(bodyParser.json());
 
 //ROuter
 app.use('/dishes', dishRouter); 
+// app.use('/dishes/:dishId', dishRouter);
 app.use('/promos', promoRouter);
-app.use('/promos/:promoId', promoRouter);
+// app.use('/promos/:promoId', promoRouter);
 
 
 // Working with each resource
@@ -44,13 +45,13 @@ app.use('/promos/:promoId', promoRouter);
 // });
 
 
-// app.use((req,res, next)=>{
-//     console.log(req.headers);
+app.use((req,res, next)=>{
+    console.log(req.headers);
     
-//     res.StatusCode =200;
-//     res.setHeader('Content-Type', 'text/html');
-//     res.end('<html><body><h1>Hello ExpressJs</h1></body></html>');
-// });
+    res.StatusCode =200;
+    res.setHeader('Content-Type', 'text/html');
+    res.end('<html><body><h1>Hello ExpressJs</h1></body></html>');
+});
 
 const server = http.createServer(app);
 
